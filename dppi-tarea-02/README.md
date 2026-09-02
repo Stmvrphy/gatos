@@ -1,70 +1,28 @@
-# Album Cover Gesture Detector
+# Nombre del proyecto
 
-Point your webcam at yourself, make a face/hand gesture, and display the corresponding iconic album cover in real time. Runs either as a desktop app (OpenCV windows) or entirely in the browser (MediaPipe WASM).
+## tarea-02
 
-Two windows/panes side by side: 
-- **Camera** — your webcam feed with landmarks drawn on top, plus a live debug readout (gesture, yaw, pitch)
-- **Meme / Album** — the album cover matching whatever gesture you're currently making
+- **Noelia_Landuburu**
+- **Sebastian_Urquiza**
 
-## Gestures
+- Asignatura: Dispositivos Periféricos y Plataformas para la Interacción Digital **DIS9087**
 
-| # | Gesture | How to trigger | Album Cover |
-|---|---|---|---|
-| 1 | Cruz / Cross | Cruzar un dedo horizontal con otro vertical | `BLIZZARD_OZZY.webp` (Ozzy Osbourne) |
-| 2 | Dos manos en la cara | Dos manos tapan la cara | `BOOTLEG_DYLAN.jpg` (Bob Dylan) |
-| 3 | Heroes Pose | Una mano bajo la cara y otra en el aire al costado | `HEROES_BOWIE.jpg` (David Bowie) |
-| 4 | Manos a los hombros | Dos manos extendidas cruzadas tocando los hombros | `QUEEN2_QUEEN.jpeg` (Queen II) |
-| 5 | Cabeza atrás (perfil) | Cabeza inclinada hacia atrás de perfil (yaw + pitch) | `MADONNA_TRUE_BLUE.jpeg` (Madonna) |
-| 6 | Cabeza atrás (frente) | Cabeza inclinada hacia atrás de frente (pitch) | `THEBENDS_RADIOHEAD.jpeg` (Radiohead) |
-| - | Default / Reposo | Sin gesto activo (estado de espera) | `rick_cover.jpg` (Rick Astley) |
+Proyecto de reconocimiento de gestos, utilizando Python y MediaPipe. Realizado tomando como referencia este repositorio:
 
-## Running it — desktop (Python)
+- <https://github.com/catherpiee/meowmeowcatcam>
 
-Requires Python 3 and a webcam.
+## Gestos
 
-Easiest way: just double-click **`Launch Gesture Meme.command`**. First run takes a minute to set itself up (installs everything automatically), then launches straight away. Every run after that is instant.
+| # | *Nombre* | *Cómo se activa* | *imagen* |
+| --- | --- | --- | --- |
+| 1 | Ozzy_Osbourne_Blizzar_of_Ozz | crossFingers: Dedos índices en cruz | BLIZZARD_OZZY.webp |
+| 2 | Bob Dylan_The_Bootleg_Series | twoHandsCoverFace: Ambas manos cubriendo la cara | BOOTLEG_DYLAN.jpg |
+| 3 | David_Bowie_Heroes | heroesBowie: Una mano bajo la barbilla, otra al costado de la cabeza | HEROES_BOWIE.jpg |
+| 4 | Queen_Queen_II | queenShoulders: Manos cruzadas sobre el pecho/hombros | QUEEN2_QUEEN.jpeg |
+| 5 | Madonna_TrueBlue | madonnaTrueBlue: Cabeza hacia atrás inclinada de perfil (Pitch + Yaw) | MADONNA_TRUE_BLUE.jpeg |
+| 6 | Radiohead_The_bends | theBendsRadiohead: Cabeza hacia atrás mirando al frente (Pitch puro) | THEBENDS_RADIOHEAD.jpeg |
+| 7 | Rick_Astley_Hold_Me_In_Your_Arms | Imagen adicional en el directorio (no asignada directamente a ningún gesto) | rick_cover.jpg |
 
-**First time opening it:** macOS will warn "cannot be opened because it is from an unidentified developer" — this is normal for any downloaded script, not specific to this one. Right-click the file → **Open** → click **Open** in the dialog that appears. You only need to do this once.
+- [carpeta de imágenes](./memes)
 
-Or manually, if you prefer Terminal:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 gesture_meme.py
-```
-
-Press `q` or `Esc` in the Camera window to quit.
-
-## Running it — browser
-
-No install needed, but the webcam API requires serving over HTTP (opening `index.html` directly as a `file://` URL will not get camera permission). From this folder:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open `http://localhost:8000` and allow camera access. Models load from Google's hosted MediaPipe CDN at runtime, so nothing local is needed for the browser version.
-
-## Live debug HUD
-
-The Camera window always shows a small readout in the top-left corner:
-
-```
-gesture: sideEyeCat
-yaw: +18.4 deg  (side-eye thr +/-15.0)
-```
-
-Useful for tuning the detection thresholds at the top of `gesture_meme.py` / `app.js` if a gesture is triggering too easily or not easily enough for your setup/lighting.
-
-## Project layout
-
-```
-gesture_meme.py   desktop version (OpenCV + MediaPipe Python tasks API)
-app.js            browser version (MediaPipe tasks-vision WASM)
-index.html        browser UI shell
-memes/            meme images (+ one video, unused for now)
-models/           MediaPipe .task model files used by the desktop version
-requirements.txt  Python dependencies
-```
+- [video](./video)
