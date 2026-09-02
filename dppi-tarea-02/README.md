@@ -1,4 +1,4 @@
-# Nombre del proyecto
+# Portadas_de_discos
 
 ## tarea-02
 
